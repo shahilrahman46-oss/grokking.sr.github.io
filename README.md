@@ -1,7 +1,5 @@
 ---
-layout: default
 title: "Grokking of Modular Arithmetic · p = 67"
-description: "Full Mechanistic Interpretability Suite · One-Layer Transformer"
 ---
 
 # 🧠 Grokking of Modular Arithmetic
@@ -19,7 +17,7 @@ description: "Full Mechanistic Interpretability Suite · One-Layer Transformer"
   A reproduction and extension of <a href="https://arxiv.org/abs/2301.05217"><em>Progress measures for grokking via mechanistic interpretability</em></a> (Nanda et al., ICLR 2023) using prime <strong>p = 67</strong> as a distinct test case, with six fully-implemented analysis parts including a novel <strong>co-grokking</strong> experiment.
 </p>
 
-<hr>
+<br>
 
 ## 📥 Download
 
@@ -29,13 +27,13 @@ description: "Full Mechanistic Interpretability Suite · One-Layer Transformer"
   </a>
 </p>
 
-<hr>
+<br>
 
 ## What is Grokking?
 
 **Grokking** is a phenomenon where a neural network first perfectly memorises the training set, then — after a long delay with no change in training loss — suddenly generalises to unseen data. This project reproduces the effect on modular arithmetic tasks and reverse-engineers the internal algorithm the model learns.
 
-<hr>
+<br>
 
 ## Results
 
@@ -46,13 +44,13 @@ Training accuracy reaches 100% at ~epoch 500. Validation accuracy stays near 0% 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2fb75bd9-1c53-41df-b2da-5232a0d16390"
        alt="Part 1 – Grokking accuracy and loss curves"
-       style="max-width:100%;width:800px;"/>
+       width="800"/>
 </p>
 
-> **Left:** Accuracy curves showing the large memorisation-to-generalisation delay.  
+> **Left:** Accuracy curves showing the large memorisation-to-generalisation delay.
 > **Right:** Cross-entropy loss on a log scale — training loss is near 10⁻⁷ long before validation loss collapses.
 
-<hr>
+<br>
 
 ### Part 2 — Sparse Fourier Basis (Addition & Multiplication)
 
@@ -63,7 +61,7 @@ A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals th
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5f6e29c1-fbf6-495f-a92b-24c85ee48c46"
        alt="Part 2 – Embedding and MLP DFT power for addition"
-       style="max-width:100%;width:800px;"/>
+       width="800"/>
 </p>
 
 **Multiplication** — dominant frequencies ω ∈ {11, 21, 33} (in Z₆₆, not Z₆₇):
@@ -71,12 +69,12 @@ A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals th
 <p align="center">
   <img src="https://github.com/user-attachments/assets/4091203c-fc4e-4b2d-8da3-573176f39ab8"
        alt="Part 2 – Embedding and MLP DFT power for multiplication"
-       style="max-width:100%;width:800px;"/>
+       width="800"/>
 </p>
 
-> The shift from Z_p (addition) to Z_{p−1} (multiplication) is the model's algebraic **fingerprint** for the discrete-log isomorphism.
+> The shift from Z\_p (addition) to Z\_{p−1} (multiplication) is the model's algebraic **fingerprint** for the discrete-log isomorphism.
 
-<hr>
+<br>
 
 ### Part 3 — Three-Phase Grokking Decomposition
 
@@ -91,10 +89,10 @@ Tracking four metrics jointly exposes three mechanistically distinct phases:
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b8b98407-5c9b-42fb-9aac-2597d9ae83bf"
        alt="Part 3 – Three-phase grokking decomposition"
-       style="max-width:100%;width:700px;"/>
+       width="600"/>
 </p>
 
-<hr>
+<br>
 
 ### Part 4 — Epochs-Until-Generalisation vs. Data Fraction
 
@@ -103,7 +101,7 @@ Models trained with fractions from 10% to 90% of all 67² pairs reveal a sharp *
 <p align="center">
   <img src="https://github.com/user-attachments/assets/0001362c-43c6-4337-bf22-ab43266d1f00"
        alt="Part 4 – Epochs until generalisation vs data fraction"
-       style="max-width:100%;width:800px;"/>
+       width="700"/>
 </p>
 
 | Fraction | Grokking epoch |
@@ -116,7 +114,7 @@ Models trained with fractions from 10% to 90% of all 67² pairs reveal a sharp *
 | 80% | ~525 |
 | 90% | ~225 |
 
-<hr>
+<br>
 
 ### Part 5 — Algorithm Reverse-Engineering: (a × b) mod 67
 
@@ -135,10 +133,10 @@ For multiplication, the model learns the **discrete-logarithm isomorphism**:
 <p align="center">
   <img src="https://github.com/user-attachments/assets/48440676-c012-42aa-9bd5-1ae3c52fa9ce"
        alt="Part 5 – Algorithm reverse-engineering for multiplication"
-       style="max-width:100%;width:800px;"/>
+       width="700"/>
 </p>
 
-<hr>
+<br>
 
 ### Part 6 — Co-Grokking: Addition + Multiplication Simultaneously
 
@@ -147,10 +145,10 @@ A single model trained on **both** tasks at once shows **co-grokking**: addition
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b95f55fe-e6f3-41f4-956e-b578a3fec75d"
        alt="Part 6 – Co-grokking: addition and multiplication simultaneously"
-       style="max-width:100%;width:800px;"/>
+       width="800"/>
 </p>
 
-<hr>
+<br>
 
 ## Installation & Usage
 
@@ -159,7 +157,7 @@ git clone https://github.com/shahilrahman46-oss/grokking.sr.github.io
 cd grokking.sr.github.io
 pip install torch einops numpy matplotlib
 
-python grokking_project.py                   # default (p=67, 25k epochs)
+python grokking_project.py
 python grokking_project.py --p 89 --epochs 30000 --wd 0.8
 ```
 
@@ -175,15 +173,15 @@ python grokking_project.py --p 89 --epochs 30000 --wd 0.8
 | `--cogrok_epochs` | 50,000 | Epochs for co-grokking |
 | `--outdir` | `grokking_output` | Output directory |
 
-<hr>
+<br>
 
 ## Repository Structure
 
 ```
 .
-├── grokking_project.py       # Full analysis suite
-├── report.pdf                # Project report
-├── grokking_results.html     # Self-contained results page (all images embedded)
+├── grokking_project.py
+├── report.pdf
+├── grokking_results.html
 ├── README.md
 └── grokking_output/
     ├── part1_grokking.png
@@ -195,7 +193,7 @@ python grokking_project.py --p 89 --epochs 30000 --wd 0.8
     └── part6_cogrokking.png
 ```
 
-<hr>
+<br>
 
 ## Reference
 
@@ -209,6 +207,6 @@ python grokking_project.py --p 89 --epochs 30000 --wd 0.8
 }
 ```
 
-<hr>
+<br>
 
 <p align="center"><sub>Built with PyTorch · Faithful to Nanda et al. 2023 · Extended with co-grokking &amp; algorithm reverse-engineering</sub></p>
