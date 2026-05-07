@@ -46,7 +46,7 @@ Training accuracy reaches 100% at ~epoch 500. Validation accuracy stays near 0% 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2fb75bd9-1c53-41df-b2da-5232a0d16390"
        alt="Part 1 – Grokking accuracy and loss curves"
-       style="max-width:100%;width:900px;"/>
+       style="max-width:100%;width:800px;"/>
 </p>
 
 > **Left:** Accuracy curves showing the large memorisation-to-generalisation delay.  
@@ -63,7 +63,7 @@ A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals th
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5f6e29c1-fbf6-495f-a92b-24c85ee48c46"
        alt="Part 2 – Embedding and MLP DFT power for addition"
-       style="max-width:100%;width:900px;"/>
+       style="max-width:100%;width:800px;"/>
 </p>
 
 **Multiplication** — dominant frequencies ω ∈ {11, 21, 33} (in Z₆₆, not Z₆₇):
@@ -71,7 +71,7 @@ A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals th
 <p align="center">
   <img src="https://github.com/user-attachments/assets/4091203c-fc4e-4b2d-8da3-573176f39ab8"
        alt="Part 2 – Embedding and MLP DFT power for multiplication"
-       style="max-width:100%;width:900px;"/>
+       style="max-width:100%;width:800px;"/>
 </p>
 
 > The shift from Z_p (addition) to Z_{p−1} (multiplication) is the model's algebraic **fingerprint** for the discrete-log isomorphism.
@@ -147,7 +147,7 @@ A single model trained on **both** tasks at once shows **co-grokking**: addition
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b95f55fe-e6f3-41f4-956e-b578a3fec75d"
        alt="Part 6 – Co-grokking: addition and multiplication simultaneously"
-       style="max-width:100%;width:900px;"/>
+       style="max-width:100%;width:800px;"/>
 </p>
 
 <hr>
