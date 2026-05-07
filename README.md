@@ -42,7 +42,8 @@
 Training accuracy reaches 100% at ~epoch 500. Validation accuracy stays near 0% until **epoch ≈ 10,750**, then jumps sharply — the textbook grokking signature.
 
 <p align="center">
-  <img width="800" alt="part1_grokking" src="https://github.com/user-attachments/assets/d428ef93-6a73-400f-a886-8ec76cdecca2" />
+  <img width="800" alt="part1_grokking" src=<img width="2071" height="718" alt="part1_grokking" src="https://github.com/user-attachments/assets/e335ca63-11e7-4f05-ae92-c61a77369a1c" />
+ />
 </p>
 
 > **Left:** Accuracy curves showing the large memorisation-to-generalisation delay.
