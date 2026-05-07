@@ -15,17 +15,13 @@
 
 ---
 
-## 📥 Downloads
+## 📥 Download
 
 <p align="center">
   <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/archive/refs/heads/main.zip">
     <img src="https://img.shields.io/badge/⬇️%20Download-Source%20Code%20(.zip)-0ea5e9?style=for-the-badge"/>
   </a>
-  &nbsp;&nbsp;
-  <a href="https://raw.githubusercontent.com/shahilrahman46-oss/grokking.sr.github.io/main/report.pdf">
-    <img src="https://img.shields.io/badge/⬇️%20Download-Project%20Report%20(.pdf)-a78bfa?style=for-the-badge"/>
-  </a>
-</p>
+ 
 
 ---
 
@@ -42,8 +38,8 @@
 Training accuracy reaches 100% at ~epoch 500. Validation accuracy stays near 0% until **epoch ≈ 10,750**, then jumps sharply — the textbook grokking signature.
 
 <p align="center">
-  <img width="800" alt="part1_grokking" src="https://github.com/user-attachments/assets/d428ef93-6a73-400f-a886-8ec76cdecca2" />
-</p>
+ <img width="2071" height="718" alt="part1_grokking" src="https://github.com/user-attachments/assets/2fb75bd9-1c53-41df-b2da-5232a0d16390" />
+
 
 > **Left:** Accuracy curves showing the large memorisation-to-generalisation delay.
 > **Right:** Cross-entropy loss on a log scale — training loss is near 10⁻⁷ long before validation loss collapses.
@@ -57,14 +53,13 @@ A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals th
 **Addition** — dominant frequencies ω ∈ {4, 6, 26, 27}:
 
 <p align="center">
-  <img width="800" alt="part2_fourier" src="https://github.com/user-attachments/assets/d2f9d554-f1a0-42a3-9589-3b40c18744c2" />
-</p>
+ <img width="2071" height="755" alt="part2_fourier" src="https://github.com/user-attachments/assets/5f6e29c1-fbf6-495f-a92b-24c85ee48c46" />
+
 
 **Multiplication** — dominant frequencies ω ∈ {11, 21, 33} (in Z₆₆, not Z₆₇):
 
 <p align="center">
-  <img width="800" alt="part2_fourier_mul" src="https://github.com/user-attachments/assets/95572c56-c1be-4436-95d6-e54ecc40146f" />
-</p>
+ <img width="2071" height="755" alt="part2_fourier_mul" src="https://github.com/user-attachments/assets/4091203c-fc4e-4b2d-8da3-573176f39ab8" />
 
 > The shift from Z_p (addition) to Z_{p−1} (multiplication) is the model's algebraic **fingerprint** for the discrete-log isomorphism.
 
@@ -81,8 +76,8 @@ Tracking four metrics jointly exposes three mechanistically distinct phases:
 | **③ Cleanup** | Weight decay prunes memorisation; test acc jumps to 100% |
 
 <p align="center">
-  <img width="700" alt="part3_phases" src="https://github.com/user-attachments/assets/e7ddf8ac-4ad5-4cea-8499-377589cb5846" />
-</p>
+ <img width="2070" height="1919" alt="part3_phases" src="https://github.com/user-attachments/assets/b8b98407-5c9b-42fb-9aac-2597d9ae83bf" />
+
 
 ---
 
@@ -91,8 +86,8 @@ Tracking four metrics jointly exposes three mechanistically distinct phases:
 Models trained with fractions from 10% to 90% of all 67² pairs reveal a sharp **data threshold** for grokking:
 
 <p align="center">
-  <img width="700" alt="part4_fraction_sweep" src="https://github.com/user-attachments/assets/4be2b840-e08f-4489-bc5a-c0438e64fb51" />
-</p>
+ <img width="1471" height="718" alt="part4_fraction_sweep" src="https://github.com/user-attachments/assets/0001362c-43c6-4337-bf22-ab43266d1f00" />
+
 
 | Fraction | Grokking epoch |
 |---|---|
@@ -120,8 +115,7 @@ For multiplication, the model learns the **discrete-logarithm isomorphism**:
 3. **Decode** — map back via `2^(log_g(a)+log_g(b) mod 66) mod 67`
 
 <p align="center">
-  <img width="750" alt="part5_algorithm" src="https://github.com/user-attachments/assets/1085d232-4fa2-4621-b375-035660563fb3" />
-</p>
+<img width="1998" height="1578" alt="part5_algorithm" src="https://github.com/user-attachments/assets/48440676-c012-42aa-9bd5-1ae3c52fa9ce" />
 
 ---
 
@@ -130,8 +124,7 @@ For multiplication, the model learns the **discrete-logarithm isomorphism**:
 A single model trained on **both** tasks at once shows **co-grokking**: addition groks at **ep 31,150** and multiplication at **ep 32,950** — a gap of only 1,800 epochs, suggesting shared internal Fourier representations.
 
 <p align="center">
-  <img width="800" alt="part6_cogrokking" src="https://github.com/user-attachments/assets/4b3b227f-8ac4-4b99-b183-2d75d28f8ab1" />
-</p>
+<img width="2069" height="1513" alt="part6_cogrokking" src="https://github.com/user-attachments/assets/b95f55fe-e6f3-41f4-956e-b578a3fec75d" />
 
 ---
 
