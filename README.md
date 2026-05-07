@@ -1636,3 +1636,4 @@ python grokking_project.py --p 89 --epochs 30000 --wd 0.8
 ---
 
 <p align="center"><sub>Built with PyTorch · Faithful to Nanda et al. 2023 · Extended with co-grokking & algorithm reverse-engineering</sub></p>
+
