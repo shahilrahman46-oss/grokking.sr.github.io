@@ -15,7 +15,7 @@
 
 ---
 
-## 📥 Downloads
+## 📥 Download
 
 <p align="center">
   <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/archive/refs/heads/main.zip">
