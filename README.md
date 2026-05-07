@@ -18,11 +18,11 @@
 ## 📥 Downloads
 
 <p align="center">
-  <a href="./grokking_project.py">
+  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/raw/refs/heads/main/grokking_project.py" download>
     <img src="https://img.shields.io/badge/⬇️%20Download-Source%20Code-0ea5e9?style=for-the-badge"/>
   </a>
   &nbsp;&nbsp;
-  <a href="./report.pdf">
+  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/raw/refs/heads/main/report.pdf" download>
     <img src="https://img.shields.io/badge/⬇️%20Download-Project%20Report-a78bfa?style=for-the-badge"/>
   </a>
   &nbsp;&nbsp;
@@ -31,7 +31,7 @@
   </a>
 </p>
 
-> **Note:** To make the Report button work, commit your `report.pdf` to the root of this repository.
+> **Note:** The **Project Report** button requires `report.pdf` to be committed to the root of this repository. The **Source Code** button works as long as `grokking_project.py` is in the repo root.
 
 ---
 
