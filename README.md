@@ -18,20 +18,16 @@
 ## 📥 Downloads
 
 <p align="center">
-  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/raw/refs/heads/main/grokking_project.py" download>
-    <img src="https://img.shields.io/badge/⬇️%20Download-Source%20Code-0ea5e9?style=for-the-badge"/>
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/raw/refs/heads/main/report.pdf" download>
-    <img src="https://img.shields.io/badge/⬇️%20Download-Project%20Report-a78bfa?style=for-the-badge"/>
-  </a>
-  &nbsp;&nbsp;
   <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/badge/⬇️%20Download-Full%20Repo%20.zip-22c55e?style=for-the-badge"/>
+    <img src="https://img.shields.io/badge/⬇️%20Download-Source%20Code%20(.zip)-0ea5e9?style=for-the-badge"/>
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/raw/refs/heads/main/report.pdf">
+    <img src="https://img.shields.io/badge/⬇️%20Download-Project%20Report%20(.pdf)-a78bfa?style=for-the-badge"/>
   </a>
 </p>
 
-> **Note:** The **Project Report** button requires `report.pdf` to be committed to the root of this repository. The **Source Code** button works as long as `grokking_project.py` is in the repo root.
+> ⚠️ **For the Project Report button to work:** drag and drop your `report.pdf` into your repo on github.com and commit it. The Source Code button always works — it downloads the full repo as a `.zip`.
 
 ---
 
