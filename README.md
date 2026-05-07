@@ -57,8 +57,8 @@ A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals th
 **Addition** — dominant frequencies ω ∈ {4, 6, 26, 27}:
 
 <p align="center">
-  <img width="800" alt="part2_fourier" src="https://github.com/user-attachments/assets/d2f9d554-f1a0-42a3-9589-3b40c18744c2" />
-</p>
+  <img width="2071" height="718" alt="part1_grokking" src="https://github.com/user-attachments/assets/c2a55bb1-aef5-4eeb-b2f3-bb4fe49d59c8" />
+
 
 **Multiplication** — dominant frequencies ω ∈ {11, 21, 33} (in Z₆₆, not Z₆₇):
 
