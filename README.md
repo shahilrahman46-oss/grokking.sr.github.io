@@ -1,4 +1,4 @@
- 🧠 Grokking of Modular Arithmetic
+# 🧠 Grokking of Modular Arithmetic
 ### Full Mechanistic Interpretability Suite · p = 67 · One-Layer Transformer
 
 <p align="center">
@@ -13,7 +13,25 @@
   A reproduction and extension of <a href="https://arxiv.org/abs/2301.05217"><em>Progress measures for grokking via mechanistic interpretability</em></a> (Nanda et al., ICLR 2023) using prime <strong>p = 67</strong> as a distinct test case, with six fully-implemented analysis parts including a novel <strong>co-grokking</strong> experiment.
 </p>
 
+---
 
+## 📥 Downloads
+
+<p align="center">
+  <a href="./grokking_project.py">
+    <img src="https://img.shields.io/badge/⬇️%20Download-Source%20Code-0ea5e9?style=for-the-badge"/>
+  </a>
+  &nbsp;&nbsp;
+  <a href="./report.pdf">
+    <img src="https://img.shields.io/badge/⬇️%20Download-Project%20Report-a78bfa?style=for-the-badge"/>
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/archive/refs/heads/main.zip">
+    <img src="https://img.shields.io/badge/⬇️%20Download-Full%20Repo%20.zip-22c55e?style=for-the-badge"/>
+  </a>
+</p>
+
+> **Note:** To make the Report button work, commit your `report.pdf` to the root of this repository.
 
 ---
 
@@ -29,8 +47,9 @@
 
 Training accuracy reaches 100% at ~epoch 500. Validation accuracy stays near 0% until **epoch ≈ 10,750**, then jumps sharply — the textbook grokking signature.
 
-<img width="2071" height="718" alt="part1_grokking" src="https://github.com/user-attachments/assets/d428ef93-6a73-400f-a886-8ec76cdecca2" />
-
+<p align="center">
+  <img width="800" alt="part1_grokking" src="https://github.com/user-attachments/assets/d428ef93-6a73-400f-a886-8ec76cdecca2" />
+</p>
 
 > **Left:** Accuracy curves showing the large memorisation-to-generalisation delay.  
 > **Right:** Cross-entropy loss on a log scale — training loss is near 10⁻⁷ long before validation loss collapses.
@@ -43,14 +62,15 @@ A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals th
 
 **Addition** — dominant frequencies ω ∈ {4, 6, 26, 27}:
 
-<img width="2071" height="755" alt="part2_fourier" src="https://github.com/user-attachments/assets/d2f9d554-f1a0-42a3-9589-3b40c18744c2" />
-
+<p align="center">
+  <img width="800" alt="part2_fourier" src="https://github.com/user-attachments/assets/d2f9d554-f1a0-42a3-9589-3b40c18744c2" />
+</p>
 
 **Multiplication** — dominant frequencies ω ∈ {11, 21, 33} (in Z₆₆, not Z₆₇):
 
-<img width="2071" height="755" alt="part2_fourier_mul" src="https://github.com/user-attachments/assets/95572c56-c1be-4436-95d6-e54ecc40146f" />
-
-
+<p align="center">
+  <img width="800" alt="part2_fourier_mul" src="https://github.com/user-attachments/assets/95572c56-c1be-4436-95d6-e54ecc40146f" />
+</p>
 
 > The shift from Z_p (addition) to Z_{p−1} (multiplication) is the model's algebraic **fingerprint** for the discrete-log isomorphism.
 
@@ -66,8 +86,9 @@ Tracking four metrics jointly exposes three mechanistically distinct phases:
 | **② Circuit Formation** | Fourier circuits strengthen; weight norm begins falling |
 | **③ Cleanup** | Weight decay prunes memorisation; test acc jumps to 100% |
 
-<img width="2070" height="1919" alt="part3_phases" src="https://github.com/user-attachments/assets/e7ddf8ac-4ad5-4cea-8499-377589cb5846" />
-
+<p align="center">
+  <img width="700" alt="part3_phases" src="https://github.com/user-attachments/assets/e7ddf8ac-4ad5-4cea-8499-377589cb5846" />
+</p>
 
 ---
 
@@ -75,8 +96,9 @@ Tracking four metrics jointly exposes three mechanistically distinct phases:
 
 Models trained with fractions from 10% to 90% of all 67² pairs reveal a sharp **data threshold** for grokking:
 
-<img width="1471" height="718" alt="part4_fraction_sweep" src="https://github.com/user-attachments/assets/4be2b840-e08f-4489-bc5a-c0438e64fb51" />
-
+<p align="center">
+  <img width="700" alt="part4_fraction_sweep" src="https://github.com/user-attachments/assets/4be2b840-e08f-4489-bc5a-c0438e64fb51" />
+</p>
 
 | Fraction | Grokking epoch |
 |---|---|
@@ -103,8 +125,9 @@ For multiplication, the model learns the **discrete-logarithm isomorphism**:
 2. **Combine** — compute `log_g(a) + log_g(b) mod 66` via cosine addition formula
 3. **Decode** — map back via `2^(log_g(a)+log_g(b) mod 66) mod 67`
 
-<img width="1998" height="1578" alt="part5_algorithm" src="https://github.com/user-attachments/assets/1085d232-4fa2-4621-b375-035660563fb3" />
-
+<p align="center">
+  <img width="750" alt="part5_algorithm" src="https://github.com/user-attachments/assets/1085d232-4fa2-4621-b375-035660563fb3" />
+</p>
 
 ---
 
@@ -112,16 +135,17 @@ For multiplication, the model learns the **discrete-logarithm isomorphism**:
 
 A single model trained on **both** tasks at once shows **co-grokking**: addition groks at **ep 31,150** and multiplication at **ep 32,950** — a gap of only 1,800 epochs, suggesting shared internal Fourier representations.
 
-<img width="2069" height="1513" alt="part6_cogrokking" src="https://github.com/user-attachments/assets/4b3b227f-8ac4-4b99-b183-2d75d28f8ab1" />
-
+<p align="center">
+  <img width="800" alt="part6_cogrokking" src="https://github.com/user-attachments/assets/4b3b227f-8ac4-4b99-b183-2d75d28f8ab1" />
+</p>
 
 ---
 
 ## Installation & Usage
 
 ```bash
-git clone https://github.com/<your-username>/grokking-modular-arithmetic
-cd grokking-modular-arithmetic
+git clone https://github.com/shahilrahman46-oss/grokking.sr.github.io
+cd grokking.sr.github.io
 pip install torch einops numpy matplotlib
 
 python grokking_project.py                   # default (p=67, 25k epochs)
@@ -147,6 +171,7 @@ python grokking_project.py --p 89 --epochs 30000 --wd 0.8
 ```
 .
 ├── grokking_project.py       # Full analysis suite
+├── report.pdf                # Project report (download above)
 ├── grokking_results.html     # Self-contained results page (all images embedded)
 ├── README.md
 └── grokking_output/          # ← commit this folder with all PNGs
