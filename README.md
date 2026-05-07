@@ -18,16 +18,20 @@
 ## 📥 Downloads
 
 <p align="center">
-  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/raw/refs/heads/main/grokking_project.py">
+  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/releases/download/v1.0/grokking_project.py">
     <img src="https://img.shields.io/badge/⬇️%20Download-grokking__project.py-0ea5e9?style=for-the-badge"/>
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/raw/refs/heads/main/report.pdf">
+  <a href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/releases/download/v1.0/report.pdf">
     <img src="https://img.shields.io/badge/⬇️%20Download-Project%20Report%20(.pdf)-a78bfa?style=for-the-badge"/>
   </a>
 </p>
 
-> ⚠️ **To activate both buttons:** go to your repo on github.com → **Add file → Upload files** → upload `grokking_project.py` and `report.pdf` → Commit.
+>  ⚠️ **To activate the download buttons — create a GitHub Release:**
+> 1. Go to your repo on github.com → click **"Releases"** (right sidebar) → **"Create a new release"**
+> 2. Set the tag to **`v1.0`** and the title to anything (e.g. `v1.0`)
+> 3. Drag **`grokking_project.py`** and **`report.pdf`** into the **"Attach binaries"** area at the bottom
+> 4. Click **"Publish release"** — both buttons will force-download the files immediately after
 
 ---
 
