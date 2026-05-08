@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Grokking of Modular Arithmetic · p = 67</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04040f;--surface:#0b0b1e;--card:#101028;--border:#1e1e42;
+  --txt:#c8d0e8;--muted:#52527a;--blue:#5b9cf6;--cyan:#38bdf8;
+  --green:#4ade80;--purple:#9b7aff;--red:#f87171;--yellow:#fbbf24;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.8;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;opacity:.3;pointer-events:none;z-index:0}
+.blob1{position:fixed;top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(155,122,255,.15),transparent 70%);pointer-events:none;z-index:0}
+.blob2{position:fixed;bottom:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(91,156,246,.12),transparent 70%);pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:64px 28px 120px}
+
+/* HERO */
+.hero{text-align:center;padding:20px 0 64px;border-bottom:1px solid var(--border);margin-bottom:72px}
+.hero-label{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);border:1px solid rgba(155,122,255,.35);padding:4px 14px;border-radius:999px;margin-bottom:28px;background:rgba(155,122,255,.07)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}
+.grad{background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 50%,var(--red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .sub{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:28px}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:28px}
+.badges img{height:20px}
+.tagline{max-width:620px;margin:0 auto 40px;font-size:13px;color:var(--muted);line-height:1.9}
+.tagline a{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(91,156,246,.4)}
+.tagline a:hover{color:var(--cyan)}
+
+/* BUTTONS */
+.dl-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.06em;text-decoration:none;transition:all .2s;cursor:pointer;border:none;position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.btn-zip{background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff}
+.btn-py{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff}
+.btn svg{flex-shrink:0;width:15px;height:15px}
+
+/* SECTIONS */
+section{margin-bottom:72px}
+h2{font-size:1.4rem;font-weight:700;color:#e0e6ff;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);letter-spacing:-.02em}
+h3{font-size:1rem;font-weight:600;color:var(--blue);margin:32px 0 12px}
+p{margin-bottom:14px;color:var(--txt)}
+strong{color:#e2e8f0}
+a{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(91,156,246,.3)}
+a:hover{color:var(--cyan)}
+
+/* IMAGES */
+.img-wrap{text-align:center;margin:24px 0}
+.img-wrap img{max-width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 40px rgba(0,0,0,.6)}
+.caption{display:block;margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.6}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--purple);background:rgba(155,122,255,.07);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;font-size:12.5px;color:var(--muted)}
+
+/* PHASE CARDS */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:20px 0}
+.phase{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;transition:border-color .2s}
+.phase:hover{border-color:var(--purple)}
+.phase .tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.phase .name{font-weight:600;color:#e2e8f0;margin-bottom:6px}
+.phase .desc{font-size:12px;color:var(--muted)}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:var(--card);color:var(--purple);padding:10px 16px;text-align:left;border:1px solid var(--border);letter-spacing:.05em;font-weight:600}
+td{padding:9px 16px;border:1px solid var(--border);color:var(--txt)}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+
+/* CODE */
+pre{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;overflow-x:auto;font-size:12.5px;line-height:1.7;margin:16px 0;box-shadow:inset 0 2px 12px rgba(0,0,0,.4)}
+code{font-family:'JetBrains Mono',monospace;color:var(--green)}
+pre code{color:var(--txt)}
+
+/* STEPS */
+.steps{list-style:none;margin:16px 0}
+.steps li{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px}
+.steps li .n{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;margin-top:2px}
+.steps li .body{font-size:13px}
+
+/* TREE */
+.tree{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;font-size:12.5px;line-height:2.1}
+.tree .d{color:var(--blue)}
+.tree .f{color:var(--green)}
+.tree .in{padding-left:22px}
+
+/* BIBTEX */
+.bibtex{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;font-size:12px;color:var(--muted);white-space:pre-wrap;line-height:1.9}
+
+/* FOOTER */
+footer{text-align:center;padding-top:32px;margin-top:80px;border-top:1px solid var(--border);font-size:11.5px;color:var(--muted)}
+
+/* ANIMATIONS */
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{animation:up .6s ease both}
+section{animation:up .6s ease both}
+</style>
+</head>
+<body>
+<div class="blob1"></div>
+<div class="blob2"></div>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-label">Mechanistic Interpretability · ICLR 2023 Reproduction</span>
+  <h1>🧠 <span class="grad">Grokking</span><br/>of Modular Arithmetic</h1>
+  <p class="sub">Full Analysis Suite · p = 67 · One-Layer Transformer</p>
+  <div class="badges">
+    <img src="https://img.shields.io/badge/PyTorch-2.x-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"/>
+    <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
+    <img src="https://img.shields.io/badge/CUDA-optional-76B900?style=flat-square&logo=nvidia&logoColor=white" alt="CUDA"/>
+    <img src="https://img.shields.io/badge/Colab-ready-F9AB00?style=flat-square&logo=google-colab&logoColor=white" alt="Colab"/>
+    <img src="https://img.shields.io/badge/Based%20on-Nanda%20et%20al.%202023-a78bfa?style=flat-square" alt="Paper"/>
+  </div>
+  <p class="tagline">
+    A reproduction and extension of
+    <a href="https://arxiv.org/abs/2301.05217"><em>Progress measures for grokking via mechanistic interpretability</em></a>
+    (Nanda et al., ICLR 2023) using prime <strong>p = 67</strong> as a distinct test case,
+    with six fully-implemented analysis parts including a novel <strong>co-grokking</strong> experiment.
+  </p>
+  <div class="dl-row">
+    <a class="btn btn-zip" href="https://github.com/shahilrahman46-oss/grokking.sr.github.io/archive/refs/heads/main.zip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Source (.zip)
+    </a>
+    <a class="btn btn-py" href="https://raw.githubusercontent.com/shahilrahman46-oss/grokking.sr.github.io/main/grokking_project.py" download="grokking_project.py">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download grokking_project.py
+    </a>
+  </div>
+</div>
+
+<!-- WHAT IS GROKKING -->
+<section>
+  <h2>What is Grokking?</h2>
+  <p><strong>Grokking</strong> is a phenomenon where a neural network first perfectly memorises the training set, then — after a long delay with no change in training loss — suddenly generalises to unseen data. This project reproduces the effect on modular arithmetic tasks and reverse-engineers the internal algorithm the model learns.</p>
+</section>
+
+<!-- RESULTS -->
+<section>
+  <h2>Results</h2>
+
+  <h3>Part 1 — Grokking Curves: (a + b) mod 67</h3>
+  <p>Training accuracy reaches 100% at ~epoch 500. Validation accuracy stays near 0% until <strong>epoch ≈ 10,750</strong>, then jumps sharply — the textbook grokking signature.</p>
+  <div class="img-wrap">
+    <img src="https://github.com/user-attachments/assets/2fb75bd9-1c53-41df-b2da-5232a0d16390" alt="Part 1 – Grokking curves"/>
+    <span class="caption">Left: Accuracy curves showing the large memorisation-to-generalisation delay.<br/>Right: Cross-entropy loss on log scale — training loss hits 10⁻⁷ long before validation loss collapses.</span>
+  </div>
+
+  <h3>Part 2 — Sparse Fourier Basis (Addition &amp; Multiplication)</h3>
+  <p>A 1-D DFT of the token embedding matrix and post-ReLU MLP activations reveals that both representations concentrate power on a <strong>sparse set of frequencies</strong>, confirming the model implements a Fourier-rotation algorithm rather than a lookup table.</p>
+  <p><strong>Addition</strong> — dominant frequencies ω ∈ {4, 6, 26, 27}:</p>
+  <div class="img-wrap">
+    <img src="https://github.com/user-attachments/assets/5f6e29c1-fbf6-495f-a92b-24c85ee48c46" alt="Part 2 – Fourier addition"/>
+  </div>
+  <p><strong>Multiplication</strong> — dominant frequencies ω ∈ {11, 21, 33} (in Z₆₆, not Z₆₇):</p>
+  <div class="img-wrap">
+    <img src="https://github.com/user-attachments/assets/4091203c-fc4e-4b2d-8da3-573176f39ab8" alt="Part 2 – Fourier multiplication"/>
+  </div>
+  <div class="callout">The shift from Z<sub>p</sub> (addition) to Z<sub>p−1</sub> (multiplication) is the model's algebraic <strong>fingerprint</strong> for the discrete-log isomorphism.</div>
+
+  <h3>Part 3 — Three-Phase Grokking Decomposition</h3>
+  <p>Tracking four metrics jointly exposes three mechanistically distinct phases:</p>
+  <div class="phases">
+    <div class="phase">
+      <div class="tag">Phase ①</div>
+      <div class="name">Memorisation</div>
+      <div class="desc">Train acc → 100%; test acc ≈ 0%; weights grow</div>
+    </div>
+    <div class="phase">
+      <div class="tag">Phase ②</div>
+      <div class="name">Circuit Formation</div>
+      <div class="desc">Fourier circuits strengthen; weight norm begins falling</div>
+    </div>
+    <div class="phase">
+      <div class="tag">Phase ③</div>
+      <div class="name">Cleanup</div>
+      <div class="desc">Weight decay prunes memorisation; test acc jumps to 100%</div>
+    </div>
+  </div>
+  <div class="img-wrap">
+    <img src="https://github.com/user-attachments/assets/b8b98407-5c9b-42fb-9aac-2597d9ae83bf" alt="Part 3 – Three phases" style="max-width:620px"/>
+  </div>
+
+  <h3>Part 4 — Epochs-Until-Generalisation vs. Data Fraction</h3>
+  <p>Models trained with fractions from 10%–90% of all 67² pairs reveal a sharp <strong>data threshold</strong> for grokking:</p>
+  <div class="img-wrap">
+    <img src="https://github.com/user-attachments/assets/0001362c-43c6-4337-bf22-ab43266d1f00" alt="Part 4 – Fraction sweep" style="max-width:700px"/>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Fraction</th><th>Grokking epoch</th></tr></thead>
+      <tbody>
+        <tr><td>10–30%</td><td>✗ No grokking within 15,000 epochs</td></tr>
+        <tr><td>40%</td><td>~8,100</td></tr>
+        <tr><td>50%</td><td>~2,475</td></tr>
+        <tr><td>60%</td><td>~1,350</td></tr>
+        <tr><td>70%</td><td>~600</td></tr>
+        <tr><td>80%</td><td>~525</td></tr>
+        <tr><td>90%</td><td>~225</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Part 5 — Algorithm Reverse-Engineering: (a × b) mod 67</h3>
+  <p>For multiplication, the model learns the <strong>discrete-logarithm isomorphism</strong>:</p>
+  <pre><code>(Z₆₇*, ×)  ≅  (Z₆₆, +)   via   a ↦ ind_g(a)   where g = 2</code></pre>
+  <p><strong>Learned algorithm — 3 steps:</strong></p>
+  <ul class="steps">
+    <li><span class="n">1</span><span class="body"><strong>Encode</strong> — embed token <code>a</code> as Fourier features of its discrete log</span></li>
+    <li><span class="n">2</span><span class="body"><strong>Combine</strong> — compute <code>log_g(a) + log_g(b) mod 66</code> via cosine addition formula</span></li>
+    <li><span class="n">3</span><span class="body"><strong>Decode</strong> — map back via <code>2^(log_g(a)+log_g(b) mod 66) mod 67</code></span></li>
+  </ul>
+  <div class="img-wrap">
+    <img src="https://github.com/user-attachments/assets/48440676-c012-42aa-9bd5-1ae3c52fa9ce" alt="Part 5 – Algorithm" style="max-width:700px"/>
+  </div>
+
+  <h3>Part 6 — Co-Grokking: Addition + Multiplication Simultaneously</h3>
+  <p>A single model trained on <strong>both</strong> tasks at once shows <strong>co-grokking</strong>: addition groks at <strong>ep 31,150</strong> and multiplication at <strong>ep 32,950</strong> — a gap of only 1,800 epochs, suggesting shared internal Fourier representations.</p>
+  <div class="img-wrap">
+    <img src="https://github.com/user-attachments/assets/b95f55fe-e6f3-41f4-956e-b578a3fec75d" alt="Part 6 – Co-grokking"/>
+  </div>
+</section>
+
+<!-- INSTALLATION -->
+<section>
+  <h2>Installation &amp; Usage</h2>
+  <pre><code>git clone https://github.com/shahilrahman46-oss/grokking.sr.github.io
+cd grokking.sr.github.io
+pip install torch einops numpy matplotlib
+
+python grokking_project.py
+python grokking_project.py --p 89 --epochs 30000 --wd 0.8</code></pre>
+  <h3>CLI Arguments</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Argument</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>--p</code></td><td>67</td><td>Prime modulus</td></tr>
+        <tr><td><code>--epochs</code></td><td>25,000</td><td>Training epochs</td></tr>
+        <tr><td><code>--frac</code></td><td>0.30</td><td>Training data fraction</td></tr>
+        <tr><td><code>--lr</code></td><td>1e-3</td><td>Learning rate</td></tr>
+        <tr><td><code>--wd</code></td><td>0.7</td><td>Weight decay</td></tr>
+        <tr><td><code>--cogrok_epochs</code></td><td>50,000</td><td>Epochs for co-grokking</td></tr>
+        <tr><td><code>--outdir</code></td><td>grokking_output</td><td>Output directory</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section>
+  <h2>Repository Structure</h2>
+  <div class="tree">
+    <span class="d">.</span><br/>
+    ├── <span class="f">grokking_project.py</span><br/>
+    ├── <span class="f">report.pdf</span><br/>
+    ├── <span class="f">grokking_results.html</span><br/>
+    ├── <span class="f">README.md</span><br/>
+    └── <span class="d">grokking_output/</span><br/>
+    <div class="in">
+      ├── <span class="f">part1_grokking.png</span><br/>
+      ├── <span class="f">part2_fourier.png</span><br/>
+      ├── <span class="f">part2_fourier_mul.png</span><br/>
+      ├── <span class="f">part3_phases.png</span><br/>
+      ├── <span class="f">part4_fraction_sweep.png</span><br/>
+      ├── <span class="f">part5_algorithm.png</span><br/>
+      └── <span class="f">part6_cogrokking.png</span>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCE -->
+<section>
+  <h2>Reference</h2>
+  <div class="bibtex">@inproceedings{nanda2023progress,
+  title     = {Progress measures for grokking via mechanistic interpretability},
+  author    = {Nanda, Neel and Chan, Lawrence and Liberum, Tom and Smith, Jess and Steinhardt, Jacob},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2023},
+  url       = {https://arxiv.org/abs/2301.05217}
+}</div>
+</section>
+
+<footer>
+  Built with PyTorch &nbsp;·&nbsp; Faithful to Nanda et al. 2023 &nbsp;·&nbsp; Extended with co-grokking &amp; algorithm reverse-engineering
+</footer>
+
+</div>
+</body>
+</html>
